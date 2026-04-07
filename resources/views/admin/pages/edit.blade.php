@@ -67,53 +67,71 @@
                                 </div>
                             </div>
 
-                        {{-- KONDISI 2: EDIT NARASI (TEKS) --}}
+                        {{-- BAGIAN KONDISI EDIT NARASI DI FILE EDIT.BLADE.PHP --}}
                         @elseif(request('target') == 'narasi')
                             <div class="space-y-6">
                                 <input type="hidden" name="title" value="{{ $page['title'] }}">
-                                <label class="block text-[11px] font-black text-sulteng-blue uppercase tracking-[0.2em] ml-2">Konten Deskripsi / Narasi Teks</label>
+                                <label class="block text-[11px] font-black text-sulteng-blue uppercase tracking-[0.2em] ml-2">
+                                    Konten Deskripsi / Narasi Teks
+                                </label>
+                                
+                                {{-- LOGIKA: Jika isinya adalah path gambar (ada kata 'storage/'), kita kosongkan saja --}}
                                 <textarea name="content_text" rows="12" 
-                                    placeholder="Masukkan penjelasan atau narasi di sini..."
-                                    class="w-full px-8 py-7 border border-slate-100 rounded-[2.5rem] focus:ring-2 focus:ring-amber-300 focus:border-amber-400 text-sm font-medium shadow-inner bg-slate-50 transition leading-relaxed">{{ $page['content'] }}</textarea>
-                                <p class="text-[9px] text-slate-400 font-bold italic ml-4 uppercase tracking-widest">*Gunakan kalimat yang informatif dan jelas</p>
+                                    placeholder="Ketik narasi atau deskripsi di sini..."
+                                    class="w-full px-8 py-7 border border-slate-100 rounded-[2.5rem] focus:ring-2 focus:ring-amber-300 focus:border-amber-400 text-sm font-medium shadow-inner bg-slate-50 transition leading-relaxed">{{ Str::contains($page['content'], 'storage/') ? '' : $page['content'] }}</textarea>
+                                
+                                <p class="text-[9px] text-slate-400 font-bold italic ml-4 uppercase tracking-widest">
+                                    *Jika sebelumnya berisi gambar, kotak ini otomatis dikosongkan untuk input teks baru.
+                                </p>
                             </div>
 
                         {{-- KONDISI 3: EDIT VISUAL (GAMBAR) --}}
-                        @else
-                            <div x-data="{ photoPreview: null }" class="space-y-6">
-                                <input type="hidden" name="title" value="{{ $page['title'] }}">
-                                <label class="block text-[11px] font-black text-sulteng-blue uppercase tracking-[0.2em] ml-2">Pilih Gambar Konten Baru</label>
-                                
-                                <div class="relative group">
-                                    <div class="relative h-96 border-4 border-dashed border-slate-100 rounded-[3rem] flex flex-col items-center justify-center transition-all group-hover:border-amber-400 group-hover:bg-slate-50 overflow-hidden bg-white shadow-inner">
-                                        <input type="file" name="content_image" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-30"
-                                            @change="
-                                                const file = $event.target.files[0];
-                                                if (file) {
-                                                    const reader = new FileReader();
-                                                    reader.onload = (e) => { photoPreview = e.target.result; };
-                                                    reader.readAsDataURL(file);
-                                                }
-                                            ">
-                                        
-                                        <div x-show="!photoPreview" class="text-center space-y-4">
-                                            <div class="w-24 h-24 bg-slate-50 shadow-lg rounded-[2rem] flex items-center justify-center mx-auto text-slate-300 group-hover:text-amber-500 transition-all group-hover:scale-110">
-                                                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                            </div>
-                                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Klik untuk Mengunggah Gambar</p>
-                                        </div>
+@else
+    <div x-data="{ photoPreview: null }" class="space-y-6">
+        <input type="hidden" name="title" value="{{ $page['title'] }}">
+        <label class="block text-[11px] font-black text-sulteng-blue uppercase tracking-[0.2em] ml-2">Pilih Gambar Konten Baru</label>
+        
+        <div class="relative group">
+            <div class="relative h-96 border-4 border-dashed border-slate-100 rounded-[3rem] flex flex-col items-center justify-center transition-all group-hover:border-amber-400 group-hover:bg-slate-50 overflow-hidden bg-white shadow-inner">
+                
+                {{-- Input File --}}
+                <input type="file" name="content_image" id="content_image" class="absolute inset-0 w-full h-auto opacity-0 cursor-pointer z-30"
+                    @change="
+                        const file = $event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => { 
+                                photoPreview = e.target.result; 
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    ">
+                
+                {{-- Tampilan Sebelum Pilih Gambar (Jika belum ada preview, tampilkan gambar lama) --}}
+                <div x-show="!photoPreview" class="text-center space-y-4">
+                    @if($page->image)
+                        <img src="{{ asset('storage/' . $page->image) }}" class="max-h-64 rounded-2xl shadow-md mb-4 mx-auto">
+                        <p class="text-[10px] font-black text-amber-500 uppercase tracking-[0.2em]">Gambar Saat Ini (Klik untuk Ganti)</p>
+                    @else
+                        <div class="w-24 h-24 bg-slate-50 shadow-lg rounded-[2rem] flex items-center justify-center mx-auto text-slate-300 group-hover:text-amber-500 transition-all group-hover:scale-110">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Klik untuk Mengunggah Gambar</p>
+                    @endif
+                </div>
 
-                                        <div x-show="photoPreview" x-cloak class="absolute inset-0 z-20 bg-white p-2">
-                                            <img :src="photoPreview" class="w-full h-full object-contain rounded-[2.5rem] shadow-2xl">
-                                            <div class="absolute bottom-6 inset-x-0 flex justify-center">
-                                                <div class="bg-sulteng-blue/90 backdrop-blur-md text-white px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest shadow-2xl border border-white/20">✨ Pratinjau Gambar</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-[9px] text-slate-400 font-bold italic ml-4 uppercase tracking-widest">*Pastikan resolusi tinggi agar tidak pecah</p>
-                            </div>
-                        @endif
+                {{-- Tampilan Preview Setelah Pilih Gambar (Baru) --}}
+                <div x-show="photoPreview" class="absolute inset-0 z-20 bg-white p-4" x-cloak>
+                    <img :src="photoPreview" class="w-full h-full object-contain rounded-[2.5rem] shadow-2xl">
+                    <div class="absolute bottom-6 inset-x-0 flex justify-center">
+                        <div class="bg-green-500 text-white px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest shadow-2xl border border-white/20">✨ Siap Diupload</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-[9px] text-slate-400 font-bold italic ml-4 uppercase tracking-widest">*Pastikan resolusi tinggi agar tidak pecah</p>
+    </div>
+@endif
 
                         {{-- BUTTONS ACTION --}}
                         <div class="flex items-center justify-end gap-6 pt-10 border-t border-slate-100">
