@@ -17,6 +17,7 @@
     <div class="max-w-[1440px] mx-auto px-6 lg:px-12 h-full">
         <div class="flex justify-between items-center h-full">
             
+            {{-- LOGO & BRANDING --}}
             <div class="flex items-center">
                 <a href="/" class="flex items-center gap-4 group">
                     <div class="p-1 bg-white rounded-lg shadow-lg transition-transform group-hover:scale-105">
@@ -29,28 +30,33 @@
                 </a>
             </div>
 
+            {{-- NAVIGATION LINKS --}}
             <div class="hidden lg:flex items-center space-x-1 h-full">
                 
+                {{-- BERANDA --}}
                 <a href="/" class="px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition {{ request()->is('/') ? 'text-amber-400' : '' }}">BERANDA</a>
                 
+                {{-- DROPDOWN PROFIL (SUDAH DINAMIS) --}}
                 <div class="relative h-full flex items-center dropdown-group">
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition {{ request()->segment(1) == 'profil' ? 'text-amber-400' : '' }}">
                         PROFIL <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="dropdown-box absolute top-[80%] left-0 w-64 p-3 bg-[#002855] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl z-[110]">
                         <div class="flex flex-col">
-                            <a href="/profil/struktur-organisasi" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Struktur Organisasi</a>
-                            <a href="/profil/visi-misi" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Visi dan Misi</a>
-                            <a href="/profil/tugas-dan-fungsi" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Tugas dan Fungsi</a>
-                            <a href="/profil/sejarah-singkat" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Sejarah Singkat</a>
-                            <a href="/profil/pejabat" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Pejabat</a>
-                            <a href="/profil/maklumat-informasi" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Maklumat Informasi</a>
-                            <a href="/profil/lhkpn" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">LHKPN</a>
-                            <a href="/profil/keuangan" class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Keuangan</a>
+                            {{-- LOOPING DARI DATABASE --}}
+                            @forelse($nav_profil as $item)
+                                <a href="{{ url('/profil/' . $item->slug) }}" 
+                                   class="px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">
+                                    {{ $item->title }}
+                                </a>
+                            @empty
+                                <span class="px-4 py-3 text-[10px] font-bold text-white/30 italic text-center uppercase tracking-widest">Belum ada konten</span>
+                            @endforelse
                         </div>
                     </div>
                 </div>
 
+                {{-- GALERI --}}
                 <div class="relative h-full flex items-center dropdown-group">
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         GALERI <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -61,6 +67,7 @@
                     </div>
                 </div>
 
+                {{-- INFORMASI PUBLIK --}}
                 <div class="relative h-full flex items-center dropdown-group">
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         INFORMASI PUBLIK <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -71,6 +78,7 @@
                     </div>
                 </div>
 
+                {{-- PPID --}}
                 <div class="relative h-full flex items-center dropdown-group">
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         PPID <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -82,6 +90,7 @@
                     </div>
                 </div>
 
+                {{-- LAYANAN --}}
                 <div class="relative h-full flex items-center dropdown-group">
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         LAYANAN <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -93,6 +102,7 @@
                 </div>
             </div>
 
+            {{-- SOCIALS & LOGIN --}}
             <div class="flex items-center gap-4">
                 <a href="https://instagram.com/cikasdasulteng" target="_blank" class="text-white/70 hover:text-amber-400 transition-colors">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>

@@ -31,9 +31,10 @@ Route::get('/galeri', [GalleryController::class, 'index'])->name('user.galeri.in
 */
 Route::middleware(['auth', 'verified'])->group(function () {
     
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Cari baris ini dan ganti:
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
     // Kelola Akun Admin
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
