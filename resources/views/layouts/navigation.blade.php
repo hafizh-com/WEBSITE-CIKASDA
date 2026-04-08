@@ -1,107 +1,81 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+<nav x-data="{ open: false, profilOpen: false, userOpen: false }" 
+     class="fixed top-0 left-0 right-0 w-full h-24 bg-[#003366] border-b border-white/10 flex items-center shadow-2xl isolate"
+     style="background-color: #003366 !important; z-index: 9999999 !important; position: fixed !important; pointer-events: auto !important;">
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-[10000000] pointer-events-auto">
+        <div class="flex justify-between items-center h-full">
+            
+            <div class="flex items-center gap-12">
+                <div class="shrink-0 flex items-center relative z-[10000001]">
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group pointer-events-auto cursor-pointer">
+                        <div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-all duration-500">
+                            <img src="{{ asset('img/logo-cikasda.png') }}" class="w-7 h-7 object-contain" onerror="this.src='https://ui-avatars.com/api/?name=C&background=fff&color=003366'">
+                        </div>
+                        <div class="flex flex-col leading-none">
+                            <span class="text-[9px] font-black text-white/40 uppercase tracking-[0.4em]">Administrator</span>
+                            <span class="text-xl font-black text-white uppercase tracking-tighter">CIKASDA</span>
+                        </div>
                     </a>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                <div class="hidden space-x-10 sm:flex items-center relative z-[10000001] pointer-events-auto">
+                    
+                    <a href="{{ route('dashboard') }}" 
+                       class="text-[13px] font-black uppercase tracking-[0.2em] {{ request()->routeIs('dashboard') ? 'text-amber-400' : 'text-white hover:text-amber-200' }} transition-all duration-300 pointer-events-auto cursor-pointer">
+                        BERANDA
+                    </a>
 
-                    <x-nav-link :href="route('pages.index')" :active="request()->routeIs('pages.*')">
-                        {{ __('Kelola Profil') }}
-                    </x-nav-link>
+                    <div class="relative pointer-events-auto" @click.away="profilOpen = false">
+                        <button @click="profilOpen = !profilOpen" type="button"
+                                class="flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.2em] {{ request()->routeIs('pages.*') ? 'text-amber-400' : 'text-white hover:text-amber-200' }} transition-all cursor-pointer pointer-events-auto bg-transparent border-none outline-none py-4">
+                            <span>PROFIL</span>
+                            <svg class="w-4 h-4 transition-transform duration-300" :class="profilOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        
+                        <div x-show="profilOpen" 
+                             x-cloak 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             class="absolute left-0 mt-2 w-64 bg-white rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)] py-4 border border-slate-100 z-[10000002] pointer-events-auto overflow-hidden">
+                            
+                            <a href="{{ route('pages.index') }}" 
+                               class="block px-8 py-4 text-[11px] font-black text-sulteng-blue uppercase tracking-widest hover:bg-slate-50 hover:text-amber-500 transition-all cursor-pointer">
+                                Kelola Modul Profil
+                            </a>
+                        </div>
+                    </div>
 
-                    <x-nav-link :href="route('galleries.index')" :active="request()->routeIs('galleries.*')">
-                        {{ __('Kelola Galeri') }}
-                    </x-nav-link>
+                    <a href="#" class="text-[13px] font-black uppercase tracking-[0.2em] text-white hover:text-amber-200 transition-all cursor-pointer pointer-events-auto">GALERI</a>
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+            <div class="hidden sm:flex sm:items-center relative z-[10000001] pointer-events-auto">
+                <div class="relative" @click.away="userOpen = false">
+                    <button @click="userOpen = !userOpen" type="button"
+                            class="flex items-center gap-4 bg-white/10 hover:bg-white/20 px-6 py-3 rounded-2xl border border-white/10 transition-all duration-500 shadow-inner cursor-pointer pointer-events-auto outline-none">
+                        <div class="flex flex-col items-end leading-none text-white font-black">
+                            <span class="text-[11px] uppercase tracking-tighter">{{ Auth::user()->name }}</span>
+                            <span class="text-[8px] text-amber-400 uppercase tracking-[0.3em] mt-1">Super Admin</span>
+                        </div>
+                        <div class="w-10 h-10 bg-amber-400 rounded-xl flex items-center justify-center text-sulteng-blue font-black text-sm shadow-lg">
+                            {{ substr(Auth::user()->name, 0, 1) }}
+                        </div>
+                    </button>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
+                    <div x-show="userOpen" x-cloak x-transition class="absolute right-0 mt-4 w-56 bg-white rounded-[2rem] shadow-2xl py-3 border border-slate-100 overflow-hidden z-[10000002] pointer-events-auto">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            <button type="submit" class="w-full text-left px-8 py-4 text-[11px] font-black text-red-500 uppercase tracking-widest hover:bg-red-50 transition-all flex items-center gap-3 cursor-pointer border-none bg-transparent">
+                                Keluar Sistem
+                            </button>
                         </form>
-                    </x-slot>
-                </x-dropdown>
+                    </div>
+                </div>
             </div>
 
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            
-            <x-responsive-nav-link :href="route('pages.index')" :active="request()->routeIs('pages.*')">
-                {{ __('Kelola Profil') }}
-            </x-responsive-nav-link>
-            
-            <x-responsive-nav-link :href="route('galleries.index')" :active="request()->routeIs('galleries.*')">
-                {{ __('Kelola Galeri') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
         </div>
     </div>
 </nav>

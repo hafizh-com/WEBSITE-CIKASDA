@@ -62,43 +62,48 @@ class PageController extends Controller
      * Memproses update metadata, narasi, atau visual.
      */
             public function update(Request $request, $slug)
-        {
-            $page = Page::where('slug', $slug)->firstOrFail();
+            {
+                // Cari data berdasarkan slug asli
+                $page = Page::where('slug', $slug)->firstOrFail();
 
-            // 1. Update Metadata (Judul & Slug)
-            if ($request->target == 'metadata') {
-                $page->update([
-                    'title' => $request->title,
-                    'slug' => Str::slug($request->title)
-                ]);
-            } 
-            
-            // 2. Update Narasi (Hanya update kolom content, gambar tetap aman)
-            else if ($request->target == 'narasi') {
-                $page->update([
-                    'content' => $request->content_text
-                ]);
-            } 
-            
-            // 3. Update Visual (Hanya update kolom image, teks tetap aman)
-            else if ($request->target == 'visual') {
-                if ($request->hasFile('content_image')) {
-                    // Hapus foto lama jika ada
-                    if ($page->image) {
-                        Storage::disk('public')->delete($page->image);
-                    }
-
-                    $path = $request->file('content_image')->store('pages', 'public');
-                    
+                // 1. Update Metadata (Judul & Slug)
+                if ($request->target == 'metadata') {
                     $page->update([
-                        'image' => $path,
-                        'type' => 'image'
+                        'title' => $request->title,
+                        // Jika judul berubah, slug juga ikut berubah otomatis
+                        'slug' => Str::slug($request->title)
                     ]);
-                }
-            }
+                } 
+                
+                // 2. Update Narasi (Hanya update kolom content, gambar di kolom image TETAP AMAN)
+                else if ($request->target == 'narasi') {
+                    $page->update([
+                        'content' => $request->content_text
+                    ]);
+                } 
+                
+                // 3. Update Visual (Hanya update kolom image, teks di kolom content TETAP AMAN)
+                else if ($request->target == 'visual') {
+                    if ($request->hasFile('content_image')) {
+                        // Hapus foto lama di storage jika ada agar tidak memenuhi server
+                        if ($page->image) {
+                            Storage::disk('public')->delete($page->image);
+                        }
 
-            return redirect()->route('pages.index')->with('success', 'Berhasil memperbarui ' . $request->target);
-        }
+                        // Simpan file ke folder storage/app/public/pages
+                        $path = $request->file('content_image')->store('pages', 'public');
+                        
+                        // Simpan path MURNI ke database
+                        $page->update([
+                            'image' => $path,
+                            'type' => 'hybrid' // Kita beri label hybrid agar sistem tahu ada teks & gambar
+                        ]);
+                    }   
+                }
+
+                // Kembali ke index dengan pesan sukses dinamis
+                return redirect()->route('pages.index')->with('success', 'Modul ' . $page->title . ' bagian ' . $request->target . ' berhasil diperbarui!');
+            }
 
     public function show($slug)
     {
