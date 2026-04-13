@@ -52,7 +52,7 @@
          ========================================== --}}
     <div class="bg-white py-32 relative z-30">
         <div class="container mx-auto px-6">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScV-9WxQTrPBMYkH0bg7tzy7M0wJOfWD2eW50dGdf9T3okh8A/viewform" target="_blank" class="block group">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScV-9WxQTrPBMYkH0bg7tzy7M0wJOfWD2eW50dGdf9T3okh8A/viewform" target="_blank" rel="noopener noreferrer" class="block group">
                 <div class="max-w-6xl mx-auto p-1 bg-gradient-to-br from-amber-400 to-sulteng-blue rounded-[4rem] shadow-blue-lg overflow-hidden transition-transform duration-500 group-hover:scale-[1.01]">
                     <div class="bg-white rounded-[3.9rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
                         
