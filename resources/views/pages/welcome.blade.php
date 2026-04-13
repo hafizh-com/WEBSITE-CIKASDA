@@ -3,12 +3,12 @@
     {{-- ==========================================
          HERO SECTION: FULL SCREEN & SINEMATIK
          ========================================== --}}
-    <div class="relative w-full h-screen min-h-[700px] overflow-hidden bg-sulteng-blue">
-        <div class="absolute inset-0 bg-gradient-to-r from-sulteng-blue via-sulteng-blue/60 to-transparent z-10"></div>
+    <div class="relative w-full h-screen min-h-175 overflow-hidden bg-sulteng-blue">
+        <div class="absolute inset-0 bg-linear-to-r from-sulteng-blue via-sulteng-blue/60 to-transparent z-10"></div>
         
         <img src="{{ asset('img/hero-cikasda.jpg') }}" 
              alt="Gedung CIKASDA" 
-             class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-[30000ms] hover:scale-110">
+             class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-30000 hover:scale-110">
         
         <div class="container mx-auto px-6 md:px-12 h-full flex items-center relative z-20">
             <div class="max-w-4xl space-y-8">
@@ -20,7 +20,7 @@
                     Official Website
                 </div>
 
-                <h1 class="text-5xl md:text-8xl font-black text-white leading-[1] tracking-tighter drop-shadow-2xl">
+                <h1 class="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter drop-shadow-2xl">
                     Membangun <br>
                     <span class="text-amber-400 italic">Infrastruktur</span> <br>
                     Lebih Tangguh
@@ -53,7 +53,7 @@
     <div class="bg-white py-32 relative z-30">
         <div class="container mx-auto px-6">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScV-9WxQTrPBMYkH0bg7tzy7M0wJOfWD2eW50dGdf9T3okh8A/viewform" target="_blank" rel="noopener noreferrer" class="block group">
-                <div class="max-w-6xl mx-auto p-1 bg-gradient-to-br from-amber-400 to-sulteng-blue rounded-[4rem] shadow-blue-lg overflow-hidden transition-transform duration-500 group-hover:scale-[1.01]">
+                <div class="max-w-6xl mx-auto p-1 bg-linear-to-br from-amber-400 to-sulteng-blue rounded-[4rem] shadow-blue-lg overflow-hidden transition-transform duration-500 group-hover:scale-[1.01]">
                     <div class="bg-white rounded-[3.9rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
                         
                         <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-amber-100 rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition duration-500"></div>
@@ -62,7 +62,7 @@
                             <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         </div>
 
-                        <div class="relative z-10 flex-grow space-y-4 text-center md:text-left">
+                        <div class="relative z-10 grow space-y-4 text-center md:text-left">
                             <span class="text-[11px] font-bold text-amber-500 uppercase tracking-[0.3em]">Portal Pelayanan</span>
                             <h3 class="text-4xl font-black text-sulteng-blue tracking-tighter uppercase">Formulir Permohonan Informasi</h3>
                             <p class="text-base text-slate-500 font-light leading-relaxed max-w-2xl">
@@ -113,7 +113,7 @@
                 <article class="bg-white rounded-[3.5rem] shadow-blue hover:shadow-blue-lg overflow-hidden group hover:-translate-y-4 transition-all duration-500 border border-slate-100">
                     <div class="h-72 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=600&h=400&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-sulteng-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="absolute inset-0 bg-linear-to-t from-sulteng-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <span class="absolute top-8 left-8 px-5 py-2 bg-amber-400 text-sulteng-blue font-black text-[9px] uppercase rounded-full shadow-lg">{{ $b['tag'] }}</span>
                     </div>
                     <div class="p-12 space-y-6">

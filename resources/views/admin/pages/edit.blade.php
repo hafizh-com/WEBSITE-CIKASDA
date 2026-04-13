@@ -17,7 +17,7 @@
                     {{-- HEADER FORM DINAMIS --}}
                     <div class="flex items-center justify-between mb-12 border-b border-slate-50 pb-8">
                         <div class="flex items-center gap-5">
-                            <div class="w-14 h-14 bg-sulteng-blue rounded-[1.5rem] flex items-center justify-center text-amber-400 shadow-xl shadow-sulteng-blue/20">
+                            <div class="w-14 h-14 bg-sulteng-blue rounded-3xl flex items-center justify-center text-amber-400 shadow-xl shadow-sulteng-blue/20">
                                 @if(request('target') == 'metadata')
                                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                 @elseif(request('target') == 'narasi')
@@ -108,10 +108,10 @@
                                         {{-- Tampilan Sebelum Pilih Gambar (Preview Gambar Lama) --}}
                                         <div x-show="!photoPreview" class="text-center space-y-4">
                                             @if($page->image)
-                                                <img src="{{ asset('storage/' . $page->image) }}" class="max-h-64 rounded-2xl shadow-md mb-4 mx-auto border-4 border-white">
+                                                <img src="{{ asset("storage/{$page->image}") }}" class="max-h-64 rounded-2xl shadow-md mb-4 mx-auto border-4 border-white">
                                                 <p class="text-[10px] font-black text-amber-500 uppercase tracking-[0.2em]">Gambar Saat Ini (Klik Untuk Ganti)</p>
                                             @else
-                                                <div class="w-24 h-24 bg-slate-50 shadow-lg rounded-[2rem] flex items-center justify-center mx-auto text-slate-300 group-hover:text-amber-500 transition-all group-hover:scale-110">
+                                                <div class="w-24 h-24 bg-slate-50 shadow-lg rounded-4xl flex items-center justify-center mx-auto text-slate-300 group-hover:text-amber-500 transition-all group-hover:scale-110">
                                                     <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                                 </div>
                                                 <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Belum Ada Gambar. Klik Untuk Unggah.</p>
@@ -138,7 +138,7 @@
                             </a>
 
                             <button type="submit" 
-                                    class="group relative inline-flex items-center justify-center px-12 py-4 font-black text-[11px] uppercase tracking-[0.2em] text-sulteng-blue bg-amber-400 rounded-[2rem] shadow-[0_10px_30px_rgba(251,191,36,0.4)] hover:bg-sulteng-blue hover:text-white hover:shadow-[0_15px_40px_rgba(0,51,102,0.3)] hover:-translate-y-1 transition-all duration-300">
+                                    class="group relative inline-flex items-center justify-center px-12 py-4 font-black text-[11px] uppercase tracking-[0.2em] text-sulteng-blue bg-amber-400 rounded-4xl shadow-[0_10px_30px_rgba(251,191,36,0.4)] hover:bg-sulteng-blue hover:text-white hover:shadow-[0_15px_40px_rgba(0,51,102,0.3)] hover:-translate-y-1 transition-all duration-300">
                                 <span class="relative flex items-center gap-2">
                                     Simpan Perubahan
                                     <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

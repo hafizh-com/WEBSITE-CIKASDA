@@ -2,9 +2,9 @@
 <div class="min-h-screen bg-slate-50 py-16 relative" x-data="{ isZoomed: false }">
 
     {{-- 1. TOMBOL KEMBALI PREMIUM --}}
-    <div class="fixed top-24 left-8 z-[2000] hidden lg:block">
+    <div class="fixed top-24 left-8 z-2000 hidden lg:block">
         <a href="{{ url('/') }}"
-           class="group flex items-center gap-4 bg-white/80 backdrop-blur-xl px-7 py-4 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/50 hover:bg-sulteng-blue hover:text-white transition-all duration-500 transform hover:-translate-x-3 text-decoration-none">
+           class="group flex items-center gap-4 bg-white/80 backdrop-blur-xl px-7 py-4 rounded-4xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/50 hover:bg-sulteng-blue hover:text-white transition-all duration-500 transform hover:-translate-x-3 text-decoration-none">
             <div class="w-11 h-11 bg-sulteng-blue rounded-2xl flex items-center justify-center group-hover:bg-amber-400 group-hover:rotate-[-15deg] transition-all duration-500 shadow-lg text-white group-hover:text-sulteng-blue">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -31,7 +31,7 @@
         </div>
 
         {{-- 3. KONTEN BOX --}}
-        <div class="bg-white p-6 md:p-16 rounded-[4rem] shadow-[0_40px_100px_rgba(0,0,0,0.04)] border border-slate-100 min-h-[500px]">
+        <div class="bg-white p-6 md:p-16 rounded-[4rem] shadow-[0_40px_100px_rgba(0,0,0,0.04)] border border-slate-100 min-h-125">
             
             @php
                 // AMBIL DATA DARI DUA SUMBER (Kolom image atau content sebagai cadangan)
@@ -45,7 +45,7 @@
                 if ($isImage) {
                     // Bersihkan semua kemungkinan double path
                     $cleanPath = str_replace(['storage/', 'public/'], '', $imageSource);
-                    $finalImagePath = asset('storage/' . $cleanPath);
+                    $finalImagePath = asset("storage/{$cleanPath}");
                 }
 
                 // Cek apakah kolom content benar-benar berisi teks narasi (bukan path gambar)
@@ -57,7 +57,7 @@
                 {{-- TAMPILAN GAMBAR --}}
                 @if($finalImagePath)
                 <div class="relative group cursor-zoom-in" @click="isZoomed = true">
-                    <div class="overflow-hidden rounded-[3rem] border-[12px] border-slate-50 shadow-inner bg-slate-50 text-center">
+                    <div class="overflow-hidden rounded-[3rem] border-12 border-slate-50 shadow-inner bg-slate-50 text-center">
                         <img src="{{ $finalImagePath }}" class="mx-auto max-w-full h-auto block transition duration-700 group-hover:scale-[1.02]" onerror="this.style.display='none'">
                     </div>
                     <div class="absolute inset-0 bg-sulteng-blue/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-[2px] rounded-[3rem]">
@@ -94,8 +94,8 @@
             @if($finalImagePath)
             <template x-teleport="body">
                 <div x-show="isZoomed" x-transition x-cloak
-                     class="fixed inset-0 z-[3000] flex items-center justify-center bg-[#001a35]/95 backdrop-blur-2xl p-4 md:p-12">
-                    <button @click="isZoomed = false" class="absolute top-10 right-10 z-[3001] bg-white/10 hover:bg-red-500 text-white p-4 rounded-full transition-all">
+                     class="fixed inset-0 z-3000 flex items-center justify-center bg-[#001a35]/95 backdrop-blur-2xl p-4 md:p-12">
+                    <button @click="isZoomed = false" class="absolute top-10 right-10 z-3001 bg-white/10 hover:bg-red-500 text-white p-4 rounded-full transition-all">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                     <img src="{{ $finalImagePath }}" @click.away="isZoomed = false" class="max-w-[90%] max-h-[90%] object-contain rounded-xl shadow-2xl border border-white/10">

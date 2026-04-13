@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-[#f4f7fa] relative overflow-hidden flex flex-col">
         
         {{-- 1. BACKGROUND DYNAMIC --}}
-        <div class="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-br from-[#002a52] via-[#004488] to-sulteng-blue -skew-y-6 origin-top-left shadow-2xl z-0">
+        <div class="absolute top-0 left-0 w-full h-125 bg-linear-to-br from-[#002a52] via-[#004488] to-sulteng-blue -skew-y-6 origin-top-left shadow-2xl z-0">
             <div class="absolute inset-0 bg-black/15"></div>
         </div>
 
@@ -56,7 +56,7 @@
                 @foreach($stats as $s)
                 <div class="bg-white rounded-[3rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white hover:-translate-y-2 transition-all duration-500">
                     <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-sulteng-blue mb-5 shadow-inner">
-                        <svg class="w-6 h-6 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             @if($s['icon'] == 'folder') <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
                             @elseif($s['icon'] == 'mail') <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             @elseif($s['icon'] == 'image') <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>

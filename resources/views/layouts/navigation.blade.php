@@ -1,10 +1,10 @@
 <nav x-data="{ profilOpen: false, userOpen: false }" 
-     class="fixed top-0 left-0 right-0 w-full h-20 bg-[#003366] border-b border-white/10 shadow-lg z-[999999]">
+     class="fixed top-0 left-0 right-0 w-full h-20 bg-[#003366] border-b border-white/10 shadow-lg z-999999">
     
-    <div class="max-w-7xl mx-auto px-4 h-full flex justify-between items-center relative z-[999999]">
+    <div class="max-w-7xl mx-auto px-4 h-full flex justify-between items-center relative z-999999">
         
         <div class="flex items-center gap-8">
-            <a href="{{ route('dashboard') }}" class="flex items-center gap-3 cursor-pointer relative z-[999999]">
+            <a href="{{ route('dashboard') }}" class="flex items-center gap-3 cursor-pointer relative z-999999">
                 <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
                     <img src="{{ asset('img/logo-cikasda.png') }}" class="w-6 h-6 object-contain">
                 </div>
@@ -32,7 +32,7 @@
                          x-transition:enter="transition ease-out duration-100"
                          x-transition:enter-start="transform opacity-0 scale-95"
                          x-transition:enter-end="transform opacity-100 scale-100"
-                         class="absolute left-0 mt-3 w-64 bg-white rounded-xl shadow-2xl py-2 z-[1000000] border border-slate-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                         class="absolute left-0 mt-3 w-64 bg-white rounded-xl shadow-2xl py-2 z-1000000 border border-slate-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
                         
                         <a href="{{ route('pages.index') }}" class="block px-6 py-3 text-[10px] font-black text-amber-500 uppercase hover:bg-amber-50 border-b border-slate-50 cursor-pointer">
                              Kelola Semua Modul
@@ -65,7 +65,7 @@
                 </div>
             </button>
 
-            <div x-show="userOpen" x-cloak class="absolute right-0 mt-3 w-48 bg-white rounded-xl shadow-2xl py-2 z-[1000000] border border-slate-100">
+            <div x-show="userOpen" x-cloak class="absolute right-0 mt-3 w-48 bg-white rounded-xl shadow-2xl py-2 z-1000000 border border-slate-100">
                 <a href="{{ route('profile.edit') }}" class="block px-6 py-3 text-[10px] font-bold text-slate-600 uppercase hover:bg-slate-50 cursor-pointer">Akun Saya</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

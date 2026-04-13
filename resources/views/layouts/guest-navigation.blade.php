@@ -13,8 +13,8 @@
     }
 </style>
 
-<nav class="w-full bg-[#003366] border-b border-white/10 sticky top-0 z-[100] shadow-2xl h-20">
-    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 h-full">
+<nav class="w-full bg-[#003366] border-b border-white/10 sticky top-0 z-100 shadow-2xl h-20">
+    <div class="max-w-360 mx-auto px-6 lg:px-12 h-full">
         <div class="flex justify-between items-center h-full">
             
             {{-- LOGO & BRANDING --}}
@@ -41,7 +41,7 @@
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition {{ request()->segment(1) == 'profil' ? 'text-amber-400' : '' }}">
                         PROFIL <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div class="dropdown-box absolute top-[80%] left-0 w-64 p-3 bg-[#002855] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl z-[110]">
+                    <div class="dropdown-box absolute top-[80%] left-0 w-64 p-3 bg-[#002855] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl z-110">
                         <div class="flex flex-col">
                             {{-- LOOPING DARI DATABASE --}}
                             @forelse($nav_profil as $item)
@@ -61,7 +61,7 @@
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         GALERI <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div class="dropdown-box absolute top-[80%] left-0 w-48 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-[110]">
+                    <div class="dropdown-box absolute top-[80%] left-0 w-48 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-110">
                         <a href="/galeri/foto" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Foto Kegiatan</a>
                         <a href="/galeri/video" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Video</a>
                     </div>
@@ -72,7 +72,7 @@
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         INFORMASI PUBLIK <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div class="dropdown-box absolute top-[80%] left-0 w-56 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-[110]">
+                    <div class="dropdown-box absolute top-[80%] left-0 w-56 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-110">
                         <a href="/informasi/berita" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Berita Terbaru</a>
                         <a href="/informasi/pengumuman" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Pengumuman</a>
                     </div>
@@ -83,7 +83,7 @@
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         PPID <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div class="dropdown-box absolute top-[80%] left-0 w-64 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-[110]">
+                    <div class="dropdown-box absolute top-[80%] left-0 w-64 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-110">
                         <a href="/ppid/profil-ppid" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Profil PPID</a>
                         <a href="/ppid/alur-permohonan" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Alur Permohonan</a>
                         <a href="/ppid/formulir-online" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Formulir Online</a>
@@ -95,7 +95,7 @@
                     <button class="flex items-center gap-1 px-4 py-2 text-[11px] font-extrabold text-white uppercase tracking-widest hover:text-amber-400 transition">
                         LAYANAN <svg class="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div class="dropdown-box absolute top-[80%] left-0 w-64 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-[110]">
+                    <div class="dropdown-box absolute top-[80%] left-0 w-64 p-3 bg-[#002855] border border-white/10 shadow-2xl rounded-2xl z-110">
                         <a href="/layanan/rekomendasi-teknis" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Rekomendasi Teknis</a>
                         <a href="/layanan/pengaduan" class="block px-4 py-3 text-[10px] font-bold text-white hover:bg-amber-400 hover:text-[#003366] rounded-xl transition uppercase">Layanan Pengaduan</a>
                     </div>
